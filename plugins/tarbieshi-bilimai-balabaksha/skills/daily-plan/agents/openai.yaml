@@ -1,4 +1,5 @@
 interface:
   display_name: "Күнделікті жоспар / План на день"
+  short_description: "Составляет план дня на основе готовой недельной циклограммы."
   icon_small: "./assets/bilim-ai-kindergardens.png"
   icon_large: "./assets/bilim-ai-kindergardens.png"
