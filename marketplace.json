@@ -1,0 +1,20 @@
+{
+  "interface": {
+    "displayName": "Tarbieshi BilimAI Balabaksha"
+  },
+  "name": "tarbieshi-bilimai-balabaksha",
+  "plugins": [
+    {
+      "source": {
+        "source": "local",
+        "path": "./plugins/tarbieshi-bilimai-balabaksha"
+      },
+      "category": "Education",
+      "name": "tarbieshi-bilimai-balabaksha",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      }
+    }
+  ]
+}

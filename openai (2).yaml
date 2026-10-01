@@ -1,0 +1,4 @@
+interface:
+  display_name: "Күнделікті жоспар / План на день"
+  icon_small: "./assets/bilim-ai-kindergardens.png"
+  icon_large: "./assets/bilim-ai-kindergardens.png"
