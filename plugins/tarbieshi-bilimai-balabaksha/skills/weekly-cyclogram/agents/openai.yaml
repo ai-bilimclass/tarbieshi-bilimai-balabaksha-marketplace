@@ -1,4 +1,5 @@
 interface:
   display_name: "Апталық циклограмма / Циклограмма недели"
+  short_description: "Составляет недельную циклограмму на основе перспективного плана."
   icon_small: "./assets/bilim-ai-kindergardens.png"
   icon_large: "./assets/bilim-ai-kindergardens.png"
