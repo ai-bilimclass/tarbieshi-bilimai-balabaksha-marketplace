@@ -1,5 +1,0 @@
-interface:
-  display_name: "Перспективалық жоспар / Перспективный план"
-  short_description: "Мектепке дейінгі топтың перспективалық жоспарын жасайды."
-  icon_small: "./assets/bilim-ai-kindergardens.png"
-  icon_large: "./assets/bilim-ai-kindergardens.png"
