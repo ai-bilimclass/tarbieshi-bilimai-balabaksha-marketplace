@@ -1,6 +1,6 @@
 interface:
   display_name: "Әдістемелік нұсқаулық / Методические рекомендации"
   short_description: "Әдістеме сұрақтарына тек чатта толық жауап береді."
-  icon_small: "./assets/bilim-ai-kindergardens.png"
-  icon_large: "./assets/bilim-ai-kindergardens.png"
+  icon_small: "./assets/tarbieshi-bilimai-balabaksha.png"
+  icon_large: "./assets/tarbieshi-bilimai-balabaksha.png"
   default_prompt: "$methodological-guidance көмегімен мектепке дейінгі тәрбие әдістемесі туралы сұрағыма тек чатта жауап беріңіз, файл жасамаңыз."

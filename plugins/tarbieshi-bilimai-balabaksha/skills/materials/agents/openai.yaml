@@ -1,5 +1,5 @@
 interface:
   display_name: "Дидактикалық материал / Дидактический материал"
   short_description: "Создаёт дидактические материалы на основе готового плана дня."
-  icon_small: "./assets/bilim-ai-kindergardens.png"
-  icon_large: "./assets/bilim-ai-kindergardens.png"
+  icon_small: "./assets/tarbieshi-bilimai-balabaksha.png"
+  icon_large: "./assets/tarbieshi-bilimai-balabaksha.png"
