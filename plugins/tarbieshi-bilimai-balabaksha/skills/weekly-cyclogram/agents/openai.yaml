@@ -1,5 +1,5 @@
 interface:
-  display_name: "Апталық циклограмма / Циклограмма недели"
-  short_description: "Составляет недельную циклограмму на основе перспективного плана."
+  display_name: "Апталық циклограмма"
+  short_description: "Перспективалық жоспар негізінде апталық циклограмма жасайды."
   icon_small: "./assets/tarbieshi-bilimai-balabaksha.png"
   icon_large: "./assets/tarbieshi-bilimai-balabaksha.png"

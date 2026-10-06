@@ -1,5 +1,5 @@
 interface:
-  display_name: "Перспективалық жоспар / Перспективный план"
+  display_name: "Перспективалық жоспар"
   short_description: "Мектепке дейінгі топтың перспективалық жоспарын жасайды."
   icon_small: "./assets/tarbieshi-bilimai-balabaksha.png"
   icon_large: "./assets/tarbieshi-bilimai-balabaksha.png"

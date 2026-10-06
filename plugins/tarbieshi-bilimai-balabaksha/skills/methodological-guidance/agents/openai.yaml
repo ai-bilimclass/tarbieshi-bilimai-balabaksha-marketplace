@@ -1,5 +1,5 @@
 interface:
-  display_name: "Әдістемелік нұсқаулық / Методические рекомендации"
+  display_name: "Әдістемелік нұсқаулық"
   short_description: "Әдістеме сұрақтарына тек чатта толық жауап береді."
   icon_small: "./assets/tarbieshi-bilimai-balabaksha.png"
   icon_large: "./assets/tarbieshi-bilimai-balabaksha.png"
