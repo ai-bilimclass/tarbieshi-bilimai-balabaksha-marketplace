@@ -1,5 +1,5 @@
 interface:
-  display_name: "Дидактикалық материал"
+  display_name: "Дидактикалық материал / Дидактический материал"
   short_description: "Дайын күн жоспары негізінде дидактикалық материалдар жасайды."
   icon_small: "./assets/tarbieshi-bilimai-balabaksha.png"
   icon_large: "./assets/tarbieshi-bilimai-balabaksha.png"

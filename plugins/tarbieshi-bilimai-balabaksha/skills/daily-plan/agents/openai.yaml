@@ -1,5 +1,5 @@
 interface:
-  display_name: "Күнделікті жоспар"
+  display_name: "Күнделікті жоспар / План на день"
   short_description: "Дайын апталық циклограмма негізінде күн жоспарын жасайды."
   icon_small: "./assets/tarbieshi-bilimai-balabaksha.png"
   icon_large: "./assets/tarbieshi-bilimai-balabaksha.png"
