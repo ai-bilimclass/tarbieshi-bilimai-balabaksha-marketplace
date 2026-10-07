@@ -10,6 +10,7 @@ from pathlib import Path
 
 from docx import Document
 from docx.enum.section import WD_ORIENT
+from docx.oxml.ns import qn
 
 
 SECTION_NAMES = {
@@ -102,6 +103,29 @@ def check_cell(text: str) -> None:
             )
 
 
+def check_table_shading(table) -> list[str]:
+    """Reject colored fills, including shading inherited from table styles."""
+    sources = [("таблица", table._tbl)]
+    style = table.style
+    seen = set()
+    while style is not None and style.style_id not in seen:
+        seen.add(style.style_id)
+        sources.append((f"стиль таблицы {style.name}", style.element))
+        style = style.base_style
+    errors = []
+    for label, element in sources:
+        for shading in element.iter(qn("w:shd")):
+            value = shading.get(qn("w:val"), "clear").lower()
+            fill = shading.get(qn("w:fill"), "auto").upper()
+            if value == "nil":
+                continue
+            themed = shading.get(qn("w:themeFill")) is not None
+            if themed or fill not in {"AUTO", "FFFFFF"} or value != "clear":
+                errors.append(f"{label}: запрещена цветная заливка; удалите её из ячеек и стиля таблицы")
+                break
+    return errors
+
+
 def audit(path: Path) -> list[str]:
     document = Document(path)
     errors: list[str] = []
@@ -112,6 +136,7 @@ def audit(path: Path) -> list[str]:
         errors.append("в перспективном плане должна быть одна таблица")
         return errors
     table = document.tables[0]
+    errors.extend(check_table_shading(table))
     if len(table.columns) != 3:
         errors.append("таблица перспективного плана должна иметь три столбца")
         return errors
@@ -136,7 +161,7 @@ def main() -> int:
         if len(errors) > 20:
             print(f"... и ещё {len(errors) - 20}", file=sys.stderr)
         return 1
-    print("PASS: альбомная ориентация и развёрнутые задачи с ходом работы проверены")
+    print("PASS: альбомная ориентация, отсутствие цветной заливки и развёрнутые задачи с ходом работы проверены")
     return 0
 
 
