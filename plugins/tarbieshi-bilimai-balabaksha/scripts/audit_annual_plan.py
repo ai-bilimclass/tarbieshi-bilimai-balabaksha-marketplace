@@ -10,6 +10,7 @@ from pathlib import Path
 
 from docx import Document
 from docx.enum.section import WD_ORIENT
+from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn
 
 
@@ -126,9 +127,56 @@ def check_table_shading(table) -> list[str]:
     return errors
 
 
+def check_intro(document) -> list[str]:
+    """Check the approved introduction before the annual-plan table."""
+    elements = []
+    for element in document.element.body:
+        if element.tag == qn("w:tbl"):
+            break
+        elements.append(element)
+    paragraphs = [p for p in document.paragraphs if p._p in elements and p.text.strip()]
+    titles = {
+        "Ұйымдастырылған іс-әрекеттің перспективалық жоспары":
+            ["Мектепке дейінгі ұйым:", "тобы", "Балалардың жасы:", "оқу жылы", "Қамту кезеңі:"],
+        "Перспективный план организованной деятельности":
+            ["Дошкольная организация:", "Группа:", "Возраст детей:", "Учебный год:", "Период охвата:"],
+        "Perspective plan of organized activities":
+            ["Preschool organization:", "Group:", "Children's age:", "Academic year:", "Coverage period:"],
+    }
+    errors = []
+    if not paragraphs or paragraphs[0].text.strip() not in titles:
+        errors.append("верхний блок: требуется точный утверждённый заголовок плана")
+    else:
+        title = paragraphs[0]
+        if title.alignment != WD_ALIGN_PARAGRAPH.CENTER:
+            errors.append("верхний блок: заголовок должен быть по центру")
+        lines = [p.text.strip() for p in paragraphs[1:]]
+        position = 0
+        for label in titles[title.text.strip()]:
+            while position < len(lines) and label not in lines[position]:
+                position += 1
+            if position == len(lines):
+                errors.append(f"верхний блок: отсутствует реквизит или нарушен порядок: {label}")
+                break
+            position += 1
+    for element in elements:
+        if any(br.get(qn("w:type")) == "page" for br in element.iter(qn("w:br"))):
+            errors.append("верхний блок: нельзя отделять реквизиты от таблицы разрывом страницы")
+            break
+        if any(node.get(qn("w:val"), "1").lower() not in {"0", "false", "off"}
+               for node in element.iter(qn("w:pageBreakBefore"))):
+            errors.append("верхний блок: нельзя начинать реквизиты с новой страницы")
+            break
+        if any(True for _ in element.iter(qn("w:sectPr"))):
+            errors.append("верхний блок: нельзя отделять реквизиты от таблицы разрывом раздела")
+            break
+    return errors
+
+
 def audit(path: Path) -> list[str]:
     document = Document(path)
     errors: list[str] = []
+    errors.extend(check_intro(document))
     for number, section in enumerate(document.sections, start=1):
         if section.orientation != WD_ORIENT.LANDSCAPE or section.page_width <= section.page_height:
             errors.append(f"раздел {number}: требуется альбомная ориентация страниц")
